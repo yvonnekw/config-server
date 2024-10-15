@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/auctionPaymentServiceDb?user=postgres&password=Mypassword1234
+
+  jpa:
+    hibernate:
+      ddl-auto: create
+
+  doc:
+    swagger-ui:
+      path: /swagger-ui.html
+    api-docs:
+      path: /api-docs
+
+kafka:
+  producer:
+    bootstrap-servers: localhost:9092
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    properties:
+      spring.json.type.mapping.paymentConfirmation: com.auction.payment_service.notification.PaymentNotificationRequest
+
+server:
+  port: 8686

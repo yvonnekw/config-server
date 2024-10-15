@@ -1,0 +1,29 @@
+# DataSource Configuration
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5433/auctionOrderServiceDb
+    username: postgres
+    password: Mypassword1234
+    platform: postgresql
+
+  # JPA & Hibernate
+  jpa:
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+kafka:
+  producer:
+    bootstrap-servers: localhost:9092
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    properties:
+      spring.json.type.mapping: orderConfirmation:com.auction.order_service.kafka.OrderConfirmation
+
+server:
+  port: 9797
+
+
