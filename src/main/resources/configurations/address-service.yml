@@ -15,12 +15,6 @@ spring:
 #addressService:
   #url: http://localhost:8787
 
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html
-  api-docs:
-    path: /api-docs
-
 server:
   port: 8787
 

@@ -1,4 +1,9 @@
 spring:
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: "http://localhost:9098/realms/auction-realm"
   cloud:
     gateway:
       discovery:
@@ -9,22 +14,98 @@ spring:
           uri: lb:http://USER-SERVICE
           predicates:
             - Path=/api/v1/users/**
+        - id: user-service-swagger-ui
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/swagger-ui/**
+        - id: user-service-api-docs
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/user-service/v3/api-docs
+        # Test endpoints for user service
+        - id: user-service-test
+          uri: lb://USER-SERVICE
+          predicates:
+            - Path=/test-api/user-service/**
         - id: order-service
           uri: lb:http://ORDER-SERVICE
           predicates:
             - Path=/api/v1/orders/**
+        - id: order-service-swagger-ui
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order-service/swagger-ui/**
+        - id: order-service-api-docs
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/order-service/v3/api-docs
         - id: order-lines-service
           uri: lb:http://ORDER-SERVICE
           predicates:
             - Path=/api/v1/order-lines/**
+      # Test endpoints for order service
+        - id: order-service-test
+          uri: lb://ORDER-SERVICE
+          predicates:
+            - Path=/test-api/order-service/**
         - id: product-service
           uri: lb:http://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/products/**
+        - id: product-service-swagger-ui
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/product-service/swagger-ui/**
+        - id: product-service-api-docs
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/product-service/v3/api-docs
+      # Test endpoints for product service
+        - id: product-service-test
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/test-api/product-service/**
         - id: payment-service
           uri: lb:http://PAYMENT-SERVICE
           predicates:
             - Path=/api/v1/payments/**
+        - id: payment-service-swagger-ui
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/payment-service/swagger-ui/**
+        - id: payment-service-api-docs
+          uri: lb://PAYMENT-SERVICE
+          predicates:
+            - Path=/payment-service/v3/api-docs
+      # Test endpoints for product service
+        - id: product-service-test
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/test-api/product-service/**
+        - id: address-service
+          uri: lb:http://ADDRESS-SERVICE
+          predicates:
+            - Path=/api/v1/addresses/**
+        - id: address-service-swagger-ui
+          uri: lb://ADDRESS-SERVICE
+          predicates:
+            - Path=/address-service/swagger-ui/**
+        - id: address-service-api-docs
+          uri: lb://ADDRESS-SERVICE
+          predicates:
+            - Path=/address-service/v3/api-docs
+spring-doc:
+  swagger-ui:
+    urls:
+      - name: User Service
+        url: /user-service/v3/api-docs
+      - name: Order Service
+        url: /order-service/v3/api-docs
+      - name: Product Service
+        url: /product-service/v3/api-docs
+      #- name: Address Service
+        #url: /address-service/v3/api-docs
+
 server:
   port:
     8222

@@ -1,28 +1,28 @@
-#spring:
-  #data:
-    #mongodb:
-      #username: admin
-      #password: password
-      #host: localhost
-      #port: 27017
-      #database: userDb
-      #authentication-database: admin
 spring:
-  datasource:
-    url: jdbc:postgresql://localhost:5433/auctionNotificationDb
-    username: postgres
-    password: Mypassword1234
-    platform: postgresql
+  data:
+    mongodb:
+      username: admin
+      password: pass
+      host: localhost
+      port: 27017
+      database: notification
+      authentication-database: admin
+#spring:
+  #datasource:
+    #url: jdbc:postgresql://localhost:5433/auctionNotificationDb
+    #username: postgres
+    #password: Mypassword1234
+    #platform: postgresql
   kafka:
     consumer:
       bootstrap-servers: localhost:9092
-      group-id: paymentGroup,orderGroup
+      group-id: paymentGroup,orderGroup,bidGroup
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       properties:
         spring.json.trusted.packages: '*'
-        spring.json.type.mapping: orderConfirmation:com.auction.notification.kafka.order.OrderConfirmation,paymentConfirmation:com.auction.notification.kafka.payment.PaymentConfirmation
+        spring.json.type.mapping: orderConfirmation:com.auction.notification.kafka.order.OrderConfirmation,paymentConfirmation:com.auction.notification.kafka.payment.PaymentConfirmation,bidWinnerConfirmation:com.auction.notification.kafka.bid.BidWinnerConfirmation
 
   mail:
     host: localhost
