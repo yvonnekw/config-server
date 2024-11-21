@@ -3,13 +3,49 @@ spring:
     oauth2:
       resource-server:
         jwt:
-          issuer-uri: "http://localhost:9098/realms/auction-realm"
+          issuer-uri: http://localhost:9098/realms/auction-realm
+  main:
+    allow-bean-definition-overriding: true
+
+
+
+
+#spring:
+  #security:
+    #oauth2:
+      #client:
+        #registration:
+         # keycloak:
+            #client-id: auction-client
+            #client-secret: 4fLoRVTTU7Hu7S1iBY2FNwPY7zYJYM77
+           # introspection-uri: http://localhost:9098/realms/auction-realm/protocol/openid-connect/token/introspect
+
+            #authorization-grant-type: client_credentials
+            #token-uri: http://localhost:9098/realms/auction-realm/protocol/openid-connect/token
+            #scope: profile email
+      #resource-server:
+        #opaque-token:
+         #client-id: auction-client
+          #client-secret: 4fLoRVTTU7Hu7S1iBY2FNwPY7zYJYM77
+
+        #jwt:
+         # issuer-uri: "http://localhost:9098/realms/auction-realm"
+
   cloud:
     gateway:
       discovery:
         locator:
           enabled: true
       routes:
+        - id: product-service-get-all-products
+          uri: lb://PRODUCT-SERVICE
+          predicates:
+            - Path=/product-service/get-all-products
+          filters:
+            - StripPrefix=1
+          metadata:
+            security:
+              permitAll: true
         - id: user-service
           uri: lb:http://USER-SERVICE
           predicates:
@@ -52,6 +88,21 @@ spring:
           uri: lb:http://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/products/**
+        - id: product-service-category
+          uri: lb:http://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/categories/**
+        - id: product-service-bid
+          uri: lb:http://PRODUCT-SERVICE
+          predicates:
+            - Path=/api/v1/bids/**
+
+        #- id: admin-service
+         # uri: lb:http://PRODUCT-SERVICE
+         # predicates:
+            #- Path=/api/v1/admin/**
+          #filters:
+            #- AddRequestHeader=Authorization, "#{request.headers['Authorization']}"
         - id: product-service-swagger-ui
           uri: lb://PRODUCT-SERVICE
           predicates:
@@ -105,6 +156,7 @@ spring-doc:
         url: /product-service/v3/api-docs
       #- name: Address Service
         #url: /address-service/v3/api-docs
+
 
 server:
   port:

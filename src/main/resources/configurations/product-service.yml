@@ -4,21 +4,39 @@ spring:
     username: postgres
     password: Mypassword1234
     platform: postgresql
+    initialization-mode: always
+  sql:
+    init:
+      mode: always
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: create-drop
       show-sql: true
-      properties:
-        hibernate:
-          dialect: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        #dialect: org.hibernate.dialect.PostgreSQLDialect
 
-          kafka:
-            producer:
-              bootstrap-servers: localhost:9092
-              key-serializer: org.apache.kafka.common.serialization.StringSerializer
-              value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-              properties:
-                spring.json.type.mapping: BidWinnerConfirmation:com.auction.product.kafka.BidWinnerConfirmation
+kafka:
+  producer:
+    bootstrap-servers: localhost:9092
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    properties:
+      spring.json.type.mapping: BidWinnerConfirmation:com.auction.product.kafka.BidWinnerConfirmation
 
 server:
   port: 8484
+
+
+    #security:
+      #user.name:admin
+      #user.password:admin123
+ # security:
+    #oauth2:
+      #resource-server:
+        #jwt:
+          #issuer-uri: http://localhost:9098/realms/auction-realm
+
+    #user:
+       #name: admin
+       #password: admin123
