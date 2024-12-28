@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/auctionPaymentServiceDb?user=postgres&password=Mypassword1234
+    url: jdbc:postgresql://localhost:5432/auctionpaymentservicedb?user=postgres&password=Mypassword1234
 
   jpa:
     hibernate:
@@ -16,13 +16,13 @@ spring:
     api-docs:
       path: /api-docs
 
-kafka:
-  producer:
-    bootstrap-servers: localhost:9092
-    key-serializer: org.apache.kafka.common.serialization.StringSerializer
-    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    properties:
-      spring.json.type.mapping.paymentConfirmation: com.auction.payment_service.notification.PaymentNotificationRequest
-
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping.paymentConfirmation: com.auction.payment_service.notification.PaymentNotificationRequest
+        max.request.size: 125829120
 server:
   port: 8686
