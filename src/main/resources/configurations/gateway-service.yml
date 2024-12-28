@@ -96,6 +96,30 @@ spring:
           uri: lb:http://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/bids/**
+        - id: cart-service
+          uri: lb:http://CART-SERVICE
+          predicates:
+            - Path=/api/v1/carts/**
+        - id: cart-service-swagger-ui
+          uri: lb://CART-SERVICE
+          predicates:
+            - Path=/cart-service/swagger-ui/**
+        - id: cart-service-api-docs
+          uri: lb://CART-SERVICE
+          predicates:
+            - Path=/cart-service/v3/api-docs
+        - id: checkout-service
+          uri: lb:http://CHECKOUT-SERVICE
+          predicates:
+            - Path=/api/v1/checkout/**
+        - id: checkout-service-swagger-ui
+          uri: lb://CHECKOUT-SERVICE
+          predicates:
+            - Path=/checkout-service/swagger-ui/**
+        - id: checkout-service-api-docs
+          uri: lb://CHECKOUT-SERVICE
+          predicates:
+            - Path=/checkout-service/v3/api-docs
 
         #- id: admin-service
          # uri: lb:http://PRODUCT-SERVICE
