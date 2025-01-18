@@ -7,10 +7,15 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+  logging:
+    level:
+      org.springframework.security: DEBUG
 
 
 
-#spring:
+
+
+        #spring:
   #security:
     #oauth2:
       #client:
@@ -169,17 +174,17 @@ spring:
           uri: lb://ADDRESS-SERVICE
           predicates:
             - Path=/address-service/v3/api-docs
-spring-doc:
-  swagger-ui:
-    urls:
-      - name: User Service
-        url: /user-service/v3/api-docs
-      - name: Order Service
-        url: /order-service/v3/api-docs
-      - name: Product Service
-        url: /product-service/v3/api-docs
-      #- name: Address Service
-        #url: /address-service/v3/api-docs
+  spring-doc:
+    swagger-ui:
+      urls:
+        - name: User Service
+          url: /user-service/v3/api-docs
+        - name: Order Service
+          url: /order-service/v3/api-docs
+        - name: Product Service
+          url: /product-service/v3/api-docs
+        #- name: Address Service
+          #url: /address-service/v3/api-docs
 
 
 server:
