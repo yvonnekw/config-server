@@ -7,10 +7,15 @@ spring:
   main:
     allow-bean-definition-overriding: true
 
+  logging:
+    level:
+      org.springframework.security: DEBUG
 
 
 
-#spring:
+
+
+        #spring:
   #security:
     #oauth2:
       #client:
@@ -33,6 +38,18 @@ spring:
 
   cloud:
     gateway:
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:4200"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+              - OPTIONS
+            allowedHeaders: "*"
+            allowCredentials: true
       discovery:
         locator:
           enabled: true
@@ -96,6 +113,30 @@ spring:
           uri: lb:http://PRODUCT-SERVICE
           predicates:
             - Path=/api/v1/bids/**
+        - id: cart-service
+          uri: lb:http://CART-SERVICE
+          predicates:
+            - Path=/api/v1/carts/**
+        - id: cart-service-swagger-ui
+          uri: lb://CART-SERVICE
+          predicates:
+            - Path=/cart-service/swagger-ui/**
+        - id: cart-service-api-docs
+          uri: lb://CART-SERVICE
+          predicates:
+            - Path=/cart-service/v3/api-docs
+        - id: checkout-service
+          uri: lb:http://CHECKOUT-SERVICE
+          predicates:
+            - Path=/api/v1/checkout/**
+        - id: checkout-service-swagger-ui
+          uri: lb://CHECKOUT-SERVICE
+          predicates:
+            - Path=/checkout-service/swagger-ui/**
+        - id: checkout-service-api-docs
+          uri: lb://CHECKOUT-SERVICE
+          predicates:
+            - Path=/checkout-service/v3/api-docs
 
         #- id: admin-service
          # uri: lb:http://PRODUCT-SERVICE
@@ -145,17 +186,17 @@ spring:
           uri: lb://ADDRESS-SERVICE
           predicates:
             - Path=/address-service/v3/api-docs
-spring-doc:
-  swagger-ui:
-    urls:
-      - name: User Service
-        url: /user-service/v3/api-docs
-      - name: Order Service
-        url: /order-service/v3/api-docs
-      - name: Product Service
-        url: /product-service/v3/api-docs
-      #- name: Address Service
-        #url: /address-service/v3/api-docs
+  spring-doc:
+    swagger-ui:
+      urls:
+        - name: User Service
+          url: /user-service/v3/api-docs
+        - name: Order Service
+          url: /order-service/v3/api-docs
+        - name: Product Service
+          url: /product-service/v3/api-docs
+        #- name: Address Service
+          #url: /address-service/v3/api-docs
 
 
 server:

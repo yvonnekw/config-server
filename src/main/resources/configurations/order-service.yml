@@ -1,7 +1,7 @@
 # DataSource Configuration
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/auctionOrderServiceDb
+    url: jdbc:postgresql://localhost:5432/auctionorderservicedb
     username: postgres
     password: Mypassword1234
     platform: postgresql
@@ -15,16 +15,45 @@ spring:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
 
-kafka:
-  producer:
-    bootstrap-servers: localhost:9092
-    key-serializer: org.apache.kafka.common.serialization.StringSerializer
-    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    properties:
-      spring.json.type.mapping: orderConfirmation:com.auction.order_service.kafka.OrderConfirmation
-
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: orderConfirmation:com.auction.order_service.kafka.OrderConfirmation
+        spring.json.trusted.packages: '*'
+        acks: all
+        retries: 3
+        max.request.size: 125829120
+#kafka:
+  #producer:
+    #bootstrap-servers: localhost:9092
+    #key-serializer: org.apache.kafka.common.serialization.StringSerializer
+   # value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+   # properties:
+      #spring.json.type.mapping: orderConfirmation:com.auction.order_service.kafka.OrderConfirmation
+      #spring.json.trusted.packages: '*'
+      #acks: all
+      #retries: 3
 server:
   port: 9797
+
+# Logging Configuration
+  logging:
+    level:
+      root: info
+      org.hibernate.SQL: debug
+      org.hibernate.type.descriptor.sql.BasicBinder: trace
+
+# Management and Monitoring
+  management:
+    endpoints:
+      web:
+        exposure:
+          include: info, health
+    security:
+      enabled: true
 
 application:
   config:

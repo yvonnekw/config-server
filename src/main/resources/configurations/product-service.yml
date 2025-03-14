@@ -1,13 +1,13 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5433/auctionProductServiceDb
+    url: jdbc:postgresql://localhost:5432/auctionproductservicedb
     username: postgres
     password: Mypassword1234
     platform: postgresql
-    initialization-mode: always
-  sql:
-    init:
-      mode: always
+    #initialization-mode: always
+  #sql:
+    #init:
+      #mode: always
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -16,16 +16,20 @@ spring:
       hibernate:
         #dialect: org.hibernate.dialect.PostgreSQLDialect
 
-kafka:
-  producer:
-    bootstrap-servers: localhost:9092
-    key-serializer: org.apache.kafka.common.serialization.StringSerializer
-    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-    properties:
-      spring.json.type.mapping: BidWinnerConfirmation:com.auction.product.kafka.BidWinnerConfirmation
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: BidWinnerConfirmation:com.auction.product.kafka.BidWinnerConfirmation
+        max.request.size: 125829120
 
 server:
   port: 8484
+
+bidding:
+  duration-days: 7
 
 
     #security:
