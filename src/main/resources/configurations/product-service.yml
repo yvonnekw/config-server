@@ -22,14 +22,17 @@ spring:
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
       properties:
-        spring.json.type.mapping: BidWinnerConfirmation:com.auction.product.kafka.BidWinnerConfirmation
+        spring.json.type.mapping: bidWinnerConfirmation:com.auction.product.kafka.BidWinnerConfirmation
         max.request.size: 125829120
 
 server:
   port: 8484
 
+#bidding:
+  #duration-days: 7
+
 bidding:
-  duration-days: 7
+  duration-minutes: 3
 
 
     #security:
