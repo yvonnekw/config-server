@@ -10,14 +10,11 @@ spring:
   kafka:
     consumer:
       bootstrap-servers: localhost:9092
-      #group-id: paymentGroup,orderGroup,bidGroup
       groups:
         payment: paymentGroup
         order: orderGroup
         bid: bidGroup
       auto-offset-reset: earliest
-      #key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      #value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
       key-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
       properties:
@@ -31,22 +28,6 @@ spring:
         max.request.size: 125829120
         fetch.max.bytes: 125829120
         max.partition.fetch.bytes: 125829120
-#spring:
-  #datasource:
-    #url: jdbc:postgresql://localhost:5433/auctionNotificationDb
-    #username: postgres
-    #password: Mypassword1234
-    #platform: postgresql
-  #kafka:
-   # consumer:
-      #bootstrap-servers: localhost:9092
-      #group-id: paymentGroup,orderGroup,bidGroup
-      #auto-offset-reset: earliest
-      #key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      #value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-      #properties:
-        #spring.json.trusted.packages: '*'
-        #spring.json.type.mapping: orderConfirmation:com.auction.notification.kafka.order.OrderConfirmation,paymentConfirmation:com.auction.notification.kafka.payment.PaymentConfirmation,bidWinnerConfirmation:com.auction.notification.kafka.bid.BidWinnerConfirmation
 
   mail:
     host: localhost

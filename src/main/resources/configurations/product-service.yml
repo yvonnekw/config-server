@@ -4,10 +4,7 @@ spring:
     username: postgres
     password: Mypassword1234
     platform: postgresql
-    #initialization-mode: always
-  #sql:
-    #init:
-      #mode: always
+
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -28,22 +25,5 @@ spring:
 server:
   port: 8484
 
-#bidding:
-  #duration-days: 7
-
 bidding:
   duration-minutes: 3
-
-
-    #security:
-      #user.name:admin
-      #user.password:admin123
- # security:
-    #oauth2:
-      #resource-server:
-        #jwt:
-          #issuer-uri: http://localhost:9098/realms/auction-realm
-
-    #user:
-       #name: admin
-       #password: admin123
