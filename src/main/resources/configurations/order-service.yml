@@ -26,16 +26,7 @@ spring:
         acks: all
         retries: 3
         max.request.size: 125829120
-#kafka:
-  #producer:
-    #bootstrap-servers: localhost:9092
-    #key-serializer: org.apache.kafka.common.serialization.StringSerializer
-   # value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
-   # properties:
-      #spring.json.type.mapping: orderConfirmation:com.auction.order_service.kafka.OrderConfirmation
-      #spring.json.trusted.packages: '*'
-      #acks: all
-      #retries: 3
+
 server:
   port: 9797
 

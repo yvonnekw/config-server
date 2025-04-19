@@ -12,30 +12,6 @@ spring:
       org.springframework.security: DEBUG
 
 
-
-
-
-        #spring:
-  #security:
-    #oauth2:
-      #client:
-        #registration:
-         # keycloak:
-            #client-id: auction-client
-            #client-secret: 4fLoRVTTU7Hu7S1iBY2FNwPY7zYJYM77
-           # introspection-uri: http://localhost:9098/realms/auction-realm/protocol/openid-connect/token/introspect
-
-            #authorization-grant-type: client_credentials
-            #token-uri: http://localhost:9098/realms/auction-realm/protocol/openid-connect/token
-            #scope: profile email
-      #resource-server:
-        #opaque-token:
-         #client-id: auction-client
-          #client-secret: 4fLoRVTTU7Hu7S1iBY2FNwPY7zYJYM77
-
-        #jwt:
-         # issuer-uri: "http://localhost:9098/realms/auction-realm"
-
   cloud:
     gateway:
       globalcors:
@@ -138,12 +114,6 @@ spring:
           predicates:
             - Path=/checkout-service/v3/api-docs
 
-        #- id: admin-service
-         # uri: lb:http://PRODUCT-SERVICE
-         # predicates:
-            #- Path=/api/v1/admin/**
-          #filters:
-            #- AddRequestHeader=Authorization, "#{request.headers['Authorization']}"
         - id: product-service-swagger-ui
           uri: lb://PRODUCT-SERVICE
           predicates:
@@ -195,9 +165,6 @@ spring:
           url: /order-service/v3/api-docs
         - name: Product Service
           url: /product-service/v3/api-docs
-        #- name: Address Service
-          #url: /address-service/v3/api-docs
-
 
 server:
   port:
