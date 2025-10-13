@@ -8,9 +8,10 @@ spring:
       database: notification
       authentication-database: admin
   kafka:
+    bootstrap-servers: localhost:9092
     consumer:
-      bootstrap-servers: localhost:9092
       groups:
+        group-id: notificationGroup
         payment: paymentGroup
         order: orderGroup
         bid: bidGroup
