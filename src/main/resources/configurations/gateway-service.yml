@@ -166,6 +166,8 @@ spring:
         - name: Product Service
           url: /product-service/v3/api-docs
 
+
+
 server:
   port:
     8222
